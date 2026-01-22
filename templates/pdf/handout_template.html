@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @font-face {
+            font-family: 'Montserrat';
+            src: url('file://{{ static_root }}/fonts/montserrat/Montserrat-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Noto Sans TC';
+            src: url('file://{{ static_root }}/fonts/noto-sans-tc/NotoSansTC-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Playfair Display';
+            src: url('file://{{ static_root }}/fonts/playfair-display/PlayfairDisplay-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'Noto Serif TC';
+            src: url('file://{{ static_root }}/fonts/noto-serif-tc/NotoSerifTC-Regular.ttf');
+        }
+        @font-face {
+            font-family: 'JetBrains Mono';
+            src: url('file://{{ static_root }}/fonts/jetbrains-mono/JetBrainsMono-Regular.ttf');
+        }
+
+        @page {
+            size: A4;
+            margin: 2.5cm;
+
+            @{{ config.page_number_pos }} {
+                content: {{ config.page_number_content|safe }};
+                font-size: 9pt;
+                color: #AAB2C0;
+                font-family: {{ config.base_font|safe }};
+            }
+        }
+
+        @page:first {
+            margin: 0;
+            @top-left { content: ""; }
+            @top-center { content: ""; }
+            @top-right { content: ""; }
+            @bottom-left { content: ""; }
+            @bottom-center { content: ""; }
+            @bottom-right { content: ""; }
+        }
+
+        {{ custom_css|safe }}
+
+        {% if config.indent_mode == 'all' %}
+        .section-content p {
+            text-indent: 2em;
+            margin-bottom: 0.5em;
+        }
+        {% elif config.indent_mode == 'except_first' %}
+        .section-content p {
+            text-indent: 2em;
+            margin-bottom: 0.5em;
+        }
+        .section-content p:first-of-type {
+            text-indent: 0;
+        }
+        {% else %}
+        .section-content p {
+            text-indent: 0;
+            margin-bottom: 1em;
+        }
+        {% endif %}
+
+        body {
+            font-family: {{ config.base_font|safe }} !important;
+            line-height: 1.8;
+            color: #3B4252;
+        }
+
+        .cover-page {
+            position: relative;
+            width: 210mm;
+            height: 297mm;
+            overflow: hidden;
+            page-break-after: always;
+            background-color: #ffffff;
+        }
+
+        .cover-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            text-align: center;
+        }
+
+        .cover-page h1 {
+            font-size: 48pt;
+            margin-bottom: 0.5cm;
+            line-height: 1.2;
+            text-align: center;
+            font-weight: bold;
+            color: {{ typography.h1.color }} !important;
+            font-family: {{ typography.h1.font_family|safe }} !important;
+        }
+
+        .toc-title {
+            font-size: 32pt;
+            color: {{ typography.h1.color }} !important;
+            font-family: {{ typography.h1.font_family|safe }} !important;
+        }
+
+        h2.section-title {
+            font-size: 28pt;
+            font-weight: bold;
+            margin-top: 1.5cm;
+            margin-bottom: 0.4cm;
+            display: inline-block;
+            position: relative;
+            line-height: 1.2;
+            z-index: 0;
+            page-break-after: avoid;
+            color: {{ typography.h2.color }} !important;
+            font-family: {{ typography.h2.font_family|safe }} !important;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            position: absolute;
+            bottom: 2px;
+            left: 0;
+            width: 100%;
+            height: 0.45em;
+            background-color: currentColor;
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        h3.subsection-title {
+            font-size: 20pt;
+            font-weight: bold;
+            margin-top: 1.2cm;
+            margin-bottom: 0.2cm;
+            page-break-after: avoid;
+            color: {{ typography.h3.color }} !important;
+            font-family: {{ typography.h3.font_family|safe }} !important;
+        }
+
+        h4.subsubsection-title {
+            font-size: 16pt;
+            font-weight: normal;
+            font-style: italic;
+            margin-top: 1cm;
+            margin-bottom: 0.1cm;
+            page-break-after: avoid;
+            color: {{ typography.h4.color }} !important;
+            font-family: {{ typography.h4.font_family|safe }} !important;
+        }
+
+        .description {
+            font-size: 18pt;
+            color: #4C566A;
+            font-style: italic;
+            margin-bottom: 3cm;
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body>
+    <div class="cover-page">
+        <div class="cover-content">
+            <h1>{{ title }}</h1>
+            {% if subtitle %}
+            <p class="description">
+                {{ subtitle|safe }}
+            </p>
+            {% endif %}
+            <div class="meta-container">
+                <div class="meta-info">
+                    {% if config.author %}<p class="author">{{ config.author }}</p>{% endif %}
+                    {% if config.institution %}<p class="institution">{{ config.institution }}</p>{% endif %}
+                    {% if config.date %}<p class="date">{{ config.date }}</p>{% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toc-page">
+        <h2 class="toc-title">{{ config.toc_title }}</h2>
+        <div class="toc-list">
+            {% for section in sections %}
+                <a href="#section-{{ forloop.counter }}" class="toc-item toc-level-{{ section.level }}">
+                    {{ section.title }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% for section in sections %}
+        <div class="section-container" id="section-{{ forloop.counter }}">
+            {% if section.level == 'section' %}
+                <h2 class="section-title">{{ section.title }}</h2>
+            {% elif section.level == 'subsection' %}
+                <h3 class="subsection-title">{{ section.title }}</h3>
+            {% else %}
+                <h4 class="subsubsection-title">{{ section.title }}</h4>
+            {% endif %}
+            <div class="section-content">
+                {{ section.html_body|safe }}
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>

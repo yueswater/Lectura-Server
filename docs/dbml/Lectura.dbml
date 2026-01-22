@@ -1,0 +1,65 @@
+Table users {
+  id integer [primary key]
+  username varchar
+  email varchar
+  password varchar
+  created_at timestamp
+}
+
+Table projects {
+  id integer [primary key]
+  owner_id integer [ref: > users.id]
+  name varchar
+  description text
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table folders {
+  id integer [primary key]
+  project_id integer [ref: > projects.id]
+  parent_id integer [ref: > folders.id, null]
+  name varchar
+  created_at timestamp
+}
+
+Table handouts {
+  id integer [primary key]
+  folder_id integer [ref: > folders.id, null]
+  project_id integer [ref: > projects.id]
+  title varchar
+  yaml_config jsonb
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table sections {
+  id integer [primary key]
+  handout_id integer [ref: > handouts.id]
+  parent_section_id integer [ref: > sections.id, null]
+  title varchar
+  content text
+  type varchar // heading, paragraph, code, table, image, equation
+  level integer
+  order_index integer
+  created_at timestamp
+  updated_at timestamp
+}
+
+Table assets {
+  id integer [primary key]
+  handout_id integer [ref: > handouts.id]
+  file_path varchar
+  file_type varchar
+  caption varchar
+  uploaded_at timestamp
+}
+
+Enum section_type {
+  heading
+  paragraph
+  code
+  table
+  image
+  equation
+}

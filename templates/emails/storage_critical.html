@@ -1,0 +1,13 @@
+<h2 style="color: #ff5861;">Action Required: Storage Almost Full</h2>
+<p>Hi {{ username }},</p>
+<p><strong>Your storage space is almost exhausted!</strong> You have reached <strong>{{ percentage }}</strong> of your available storage.</p>
+<div style="background: #fff5f5; border-left: 4px solid #ff5861; padding: 15px; margin: 20px 0; border-radius: 4px;">
+    <p style="margin: 0; color: #ff5861;"><strong>Usage Alert:</strong> {{ used_storage }} used of {{ storage_limit }} limit</p>
+</div>
+<p>Please be aware that once you reach 100%, the system will <strong>no longer be able to generate new PDF handouts</strong> for your projects.</p>
+<p>Please take immediate action by clearing space or upgrading to a higher tier plan to avoid service interruption.</p>
+<div style="text-align: center; margin-top: 30px;">
+    <a href="{{ dashboard_url }}" style="background-color: #333; color: #fff; padding: 12px 25px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 14px;">Manage Storage</a>
+</div>
+<br>
+<p>Best regards,<br>Lectura Team</p>
