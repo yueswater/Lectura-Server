@@ -35,12 +35,18 @@ RUN poetry config virtualenvs.create false \
 # Copy project files
 COPY . .
 
+# Set environment variables
+ENV PYTHONUNBUFFERED=1
+ENV DJANGO_SETTINGS_MODULE=config.settings
+ENV SECRET_KEY=build-time-secret-key-only
+
 # Ensure font cache is updated for WeasyPrint to see the fonts
 RUN fc-cache -fv
 
-ENV PYTHONUNBUFFERED=1
-ENV DJANGO_SETTINGS_MODULE=config.settings
+# Collect static files
+RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["gunicorn", "config.wsgi:application", "--bind", "0.0.0.0:8000"]
