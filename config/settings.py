@@ -26,6 +26,7 @@ sys.path.insert(0, str(BASE_DIR / "apps"))
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 from .cloudinary_settings import CLOUDINARY_STORAGE, DEFAULT_FILE_STORAGE
+from .jwt_settings import SIMPLE_JWT
 from .RESTframework_settings import REST_FRAMEWORK
 from .smtp_settings import *
 from .swagger_settings import SPECTACULAR_SETTINGS
@@ -185,3 +186,6 @@ CELERY_TASK_SERIALIZER = "json"
 # Cloudinary Configuration
 CLOUDINARY_STORAGE = CLOUDINARY_STORAGE
 DEFAULT_FILE_STORAGE = DEFAULT_FILE_STORAGE
+
+# JWT Configuration
+SIMPLE_JWT = SIMPLE_JWT
