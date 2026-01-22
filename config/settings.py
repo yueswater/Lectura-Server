@@ -25,6 +25,7 @@ sys.path.insert(0, str(BASE_DIR / "apps"))
 
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
+from .cloudinary_settings import CLOUDINARY_STORAGE, DEFAULT_FILE_STORAGE
 from .RESTframework_settings import REST_FRAMEWORK
 from .smtp_settings import *
 from .swagger_settings import SPECTACULAR_SETTINGS
@@ -36,7 +37,7 @@ from .swagger_settings import SPECTACULAR_SETTINGS
 SECRET_KEY = "django-insecure-vz5f10uh_rn^1pb18x#1f0^cc&kozpic))8jlvh^he8c9t=)n#"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["lectura-server.onrender.com", "localhost", "127.0.0.1"]
 
@@ -59,6 +60,8 @@ INSTALLED_APPS = [
     "unfold.contrib.forms",
     "unfold.contrib.import_export",
     "django_rest_passwordreset",
+    "cloudinary_storage",
+    "cloudinary",
     *LOCAL_APPS,
     "corsheaders",
     "django.contrib.admin",
@@ -178,3 +181,7 @@ CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
 CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_TASK_SERIALIZER = "json"
+
+# Cloudinary Configuration
+CLOUDINARY_STORAGE = CLOUDINARY_STORAGE
+DEFAULT_FILE_STORAGE = DEFAULT_FILE_STORAGE
