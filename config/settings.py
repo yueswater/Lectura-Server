@@ -35,9 +35,11 @@ from .swagger_settings import SPECTACULAR_SETTINGS
 SECRET_KEY = "django-insecure-vz5f10uh_rn^1pb18x#1f0^cc&kozpic))8jlvh^he8c9t=)n#"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "lectura-server.onrender.com"
+]
 
 # Custom User Model
 AUTH_USER_MODEL = "accounts.User"
