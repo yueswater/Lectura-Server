@@ -52,7 +52,8 @@ class RegisterView(generics.CreateAPIView):
 
         EmailVerificationToken.objects.create(user=user, token=token)
 
-        verification_url = f"{settings.FRONTEND_URL}/verify-email?token={token}"
+        # verification_url = f"{settings.FRONTEND_URL}/verify-email?token={token}"
+        verification_url = f"{settings.FRONTEND_URL}/verify-email/{token}"
 
         try:
             try:
