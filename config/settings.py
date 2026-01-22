@@ -14,6 +14,7 @@ import os
 import sys
 from pathlib import Path
 
+import dj_database_url
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -37,9 +38,7 @@ SECRET_KEY = "django-insecure-vz5f10uh_rn^1pb18x#1f0^cc&kozpic))8jlvh^he8c9t=)n#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    "lectura-server.onrender.com"
-]
+ALLOWED_HOSTS = ["lectura-server.onrender.com"]
 
 # Custom User Model
 AUTH_USER_MODEL = "accounts.User"
@@ -86,10 +85,9 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",
-    "http://127.0.0.1:5173",
-]
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173", "http://127.0.0.1:5173", "https://your-vercel-domain.vercel.app"]
+
+CSRF_TRUSTED_ORIGINS = ["https://lectura-server.onrender.com", "http://localhost:5173"]
 
 ROOT_URLCONF = "config.urls"
 
@@ -114,12 +112,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
+DATABASES = {"default": dj_database_url.config(default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}", conn_max_age=600)}
 
 
 # Password validation
@@ -161,6 +154,7 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Rest Framework Configuration
 REST_FRAMEWORK = REST_FRAMEWORK
