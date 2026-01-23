@@ -86,7 +86,7 @@ class AttachmentSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Attachment
-        fields = ["id", "file", "file_url", "file_name", "file_size", "mime_type", "created_at"]
+        fields = ["id", "file", "file_url", "file_name", "caption", "alt_text", "file_size", "mime_type", "created_at"]
         read_only_fields = ["id", "file_url", "file_name", "file_size", "mime_type", "created_at"]
 
     def get_file_url(self, obj):

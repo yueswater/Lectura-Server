@@ -166,6 +166,10 @@
             margin-bottom: 3cm;
             font-weight: 300;
         }
+
+        figcaption::before {
+            content: "{{ fig_label }} " counter(fig-count) "：";
+        }
     </style>
 </head>
 <body>

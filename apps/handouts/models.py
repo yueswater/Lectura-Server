@@ -117,6 +117,10 @@ class Attachment(models.Model):
     uploader = models.ForeignKey("accounts.User", on_delete=models.CASCADE, related_name="attachments")
     file = models.FileField(upload_to=attachment_upload_path)
     file_name = models.CharField(max_length=255)
+
+    caption = models.CharField(max_length=255, blank=True, help_text="Visible title below the image")
+    alt_text = models.CharField(max_length=255, blank=True, help_text="Description for screen readers")
+
     file_size = models.PositiveIntegerField(help_text="Size in bytes")
     mime_type = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -125,4 +129,4 @@ class Attachment(models.Model):
         db_table = "attachments"
 
     def __str__(self):
-        return self.file_name
+        return f"{self.file_name} (Caption: {self.caption})"

@@ -165,6 +165,7 @@ h4.subsubsection-title {
 .section-content {
     text-align: justify;
     font-size: 11pt;
+    counter-reset: fig-count;
 }
 
 .highlight {
@@ -213,4 +214,82 @@ th {
     background-color: #F8F9FB;
     font-weight: bold;
     color: #2E3440;
+}
+
+figure {
+    counter-increment: fig-count;
+    text-align: center;
+    margin: 1.5cm 0;
+    page-break-inside: avoid;
+    display: block;
+}
+
+figure img {
+    max-width: 100%;
+    max-height: 12cm;
+    height: auto;
+    border-radius: 8px;
+    margin: 0 auto;
+}
+
+figcaption {
+    margin-top: 10px;
+    font-size: 10pt;
+    font-weight: bold;
+    color: #4C566A;
+}
+
+figcaption::before {
+    content: "{{ fig_label }} " counter(fig-count) "：";
+}
+
+.admonition {
+    margin: 1.5em 0;
+    padding: 0.8em 1.2em;
+    border-radius: 10px;
+    border-left: 5px solid #4c566a;
+    background-color: #f8f9fb;
+    page-break-inside: avoid;
+}
+
+.admonition.info {
+    border-left-color: #377cfb;
+    background-color: #eff6ff;
+}
+
+.admonition.warning {
+    border-left-color: #f59e0b;
+    background-color: #fffbeb;
+}
+
+.admonition.danger {
+    border-left-color: #ef4444;
+    background-color: #fef2f2;
+}
+
+.admonition-title {
+    margin-top: 0 !important;
+    margin-bottom: 0.4em;
+    font-weight: bold;
+    font-size: 13pt;
+    display: block;
+    line-height: 1.2;
+}
+
+.admonition-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    position: relative;
+    top: -1px;
+}
+
+.admonition-icon svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+.admonition-title::before {
+    content: none !important;
 }
