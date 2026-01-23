@@ -89,12 +89,18 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:5173", "http://127.0.0.1:5173", "https://lectura-web.vercel.app"]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://lectura-web.vercel.app",
+    "https://lectura-beta.yueswater.com",
+]
 
 CSRF_TRUSTED_ORIGINS = [
     "https://lectura-server.onrender.com",
     "http://localhost:5173",
     "https://lectura-web.vercel.app",
+    "https://lectura-beta.yueswater.com",
 ]
 
 ROOT_URLCONF = "config.urls"
