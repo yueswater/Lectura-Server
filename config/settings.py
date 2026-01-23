@@ -19,10 +19,10 @@ from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 # Add the 'apps' directory to the Python path
 sys.path.insert(0, str(BASE_DIR / "apps"))
 
+# Load environment variables
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 from .cloudinary_settings import CLOUDINARY_STORAGE, DEFAULT_FILE_STORAGE
@@ -178,7 +178,7 @@ SPECTACULAR_SETTINGS = SPECTACULAR_SETTINGS
 
 # Media files
 MEDIA_URL = "media/"
-MEDIA_ROOT = BASE_DIR / "media"
+# MEDIA_ROOT = BASE_DIR / "media"
 
 # Frontend URL
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
