@@ -1,6 +1,7 @@
 import os
 import sys
 from pathlib import Path
+
 import dj_database_url
 from dotenv import load_dotenv
 
@@ -132,8 +133,8 @@ SPECTACULAR_SETTINGS = SPECTACULAR_SETTINGS
 
 CLOUDINARY_STORAGE = CL_STORAGE
 DEFAULT_FILE_STORAGE = "cloudinary_storage.storage.MediaCloudinaryStorage"
-MEDIA_URL = "/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+# MEDIA_URL = "/media/"
+# MEDIA_ROOT = BASE_DIR / "media"
 
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
 
