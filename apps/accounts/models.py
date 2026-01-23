@@ -1,13 +1,14 @@
 import uuid
 from datetime import timedelta
 
+from cloudinary_storage.storage import MediaCloudinaryStorage
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
 from handouts.models import Handout, Section
 
 from security.otp_generator import OTPGenerator
-from cloudinary_storage.storage import MediaCloudinaryStorage
+
 from .enums import Tier, UserRole
 from .utils import get_avatar_upload_path
 
@@ -19,7 +20,9 @@ class User(AbstractUser):
     role = models.CharField(
         max_length=20, choices=[(role.value, role.name) for role in UserRole], default=UserRole.EDITOR.value
     )
-    avatar = models.ImageField(upload_to=get_avatar_upload_path, storage=MediaCloudinaryStorage(), null=True, blank=True)
+    avatar = models.ImageField(
+        upload_to=get_avatar_upload_path, storage=MediaCloudinaryStorage(), null=True, blank=True
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_verified = models.BooleanField(default=False)

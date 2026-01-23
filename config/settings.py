@@ -1,6 +1,7 @@
 import os
 import sys
 from pathlib import Path
+
 import dj_database_url
 from dotenv import load_dotenv
 
@@ -9,7 +10,8 @@ sys.path.insert(0, str(BASE_DIR / "apps"))
 
 load_dotenv(os.path.join(BASE_DIR, ".env"))
 
-from .cloudinary_settings import CLOUDINARY_STORAGE as CL_STORAGE, DEFAULT_FILE_STORAGE as DF_STORAGE
+from .cloudinary_settings import CLOUDINARY_STORAGE as CL_STORAGE
+from .cloudinary_settings import DEFAULT_FILE_STORAGE as DF_STORAGE
 from .jwt_settings import SIMPLE_JWT
 from .RESTframework_settings import REST_FRAMEWORK
 from .smtp_settings import *

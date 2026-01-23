@@ -1,5 +1,6 @@
 import uuid
 
+from cloudinary_storage.storage import MediaCloudinaryStorage
 from django.db import models
 from handouts.utils import trigger_storage_email
 from projects.models import Folder, Project
@@ -115,7 +116,7 @@ class Section(models.Model):
 class Attachment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     uploader = models.ForeignKey("accounts.User", on_delete=models.CASCADE, related_name="attachments")
-    file = models.FileField(upload_to=attachment_upload_path)
+    file = models.FileField(upload_to=attachment_upload_path, storage=MediaCloudinaryStorage())
     file_name = models.CharField(max_length=255)
 
     caption = models.CharField(max_length=255, blank=True, help_text="Visible title below the image")
