@@ -63,6 +63,7 @@ class HandoutSerializer(serializers.ModelSerializer):
             "sections",
             "created_at",
             "updated_at",
+            "file_size",
         ]
         read_only_fields = ["id", "created_at", "updated_at"]
 
