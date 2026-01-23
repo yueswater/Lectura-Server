@@ -126,8 +126,8 @@ def generate_handout_pdf(handout):
 
         if "http://localhost:8000/media/" in rendered_html:
             rendered_html = rendered_html.replace("http://localhost:8000/media/", f"file://{settings.MEDIA_ROOT}/")
-        elif rendered_html.find('src="' + settings.MEDIA_URL) != -1:
-            rendered_html = rendered_html.replace('src="' + settings.MEDIA_URL, f'src="file://{settings.MEDIA_ROOT}/')
+        # elif rendered_html.find('src="' + settings.MEDIA_URL) != -1:
+        #     rendered_html = rendered_html.replace('src="' + settings.MEDIA_URL, f'src="file://{settings.MEDIA_ROOT}/')
 
         sections_data.append({"title": section.title, "html_body": rendered_html, "level": section.level})
 

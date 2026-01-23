@@ -177,8 +177,13 @@ REST_FRAMEWORK = REST_FRAMEWORK
 SPECTACULAR_SETTINGS = SPECTACULAR_SETTINGS
 
 # Media files
-MEDIA_URL = "media/"
-# MEDIA_ROOT = BASE_DIR / "media"
+if DEBUG:
+    MEDIA_URL = "media/"
+    MEDIA_ROOT = BASE_DIR / "media"
+else:
+    DEFAULT_FILE_STORAGE = DF_STORAGE
+    CLOUDINARY_STORAGE = CL_STORAGE
+    MEDIA_URL = "/media/"
 
 # Frontend URL
 FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5173")
