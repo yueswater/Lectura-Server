@@ -5,7 +5,7 @@ from django.utils import timezone
 from letters.models import Letter
 
 
-@shared_task
+@shared_task(time_limit=60, soft_time_limit=50)
 def send_letter_task(letter_id):
     try:
         letter = Letter.objects.get(id=letter_id)
