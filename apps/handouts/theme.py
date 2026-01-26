@@ -5,9 +5,9 @@ THEME_DEFAULTS = {
 }
 
 FONT_MAP = {
-    "sans": '"Montserrat", "Noto Sans TC", sans-serif',
-    "serif": '"Playfair Display", "Noto Serif TC", serif',
-    "mono": '"JetBrains Mono", monospace',
+    "sans": '"Montserrat", "Noto Sans TC", "Noto Sans Thai", sans-serif',
+    "serif": '"Playfair Display", "Noto Serif TC", "Sarabun", serif',
+    "mono": '"JetBrains Mono", "Noto Sans Thai Looped", monospace',
 }
 
 PAGE_FORMATS = {
